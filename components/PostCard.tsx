@@ -15,8 +15,10 @@ type PostCardProps = Prisma.PostGetPayload<{
 const PostCard = async ({ props }: { props: PostCardProps }) => {
   const session = await getServerSession(authOptions);
 
+  const readMore = props.content.length > 500;
+
   return (
-    <div className="card rounded-md border   p-4 m-4 shadow-md">
+    <div className="card rounded-md border   p-4 m-4 shadow-md  line-clamp-1">
       <div className="card-title flex justify-between">
         <div className="flex items-center gap-2">
           <Image
@@ -45,7 +47,8 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
       </div>
 
       <div className="card-body ">
-        <p className="whitespace-pre-wrap">{props.content}</p>
+        <p className="whitespace-pre-wrap ">{props.content}</p>
+
         <div className="flex justify-center bg-slate-800">
           {props.image && (
             <Image

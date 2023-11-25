@@ -36,7 +36,7 @@ const Navigation = ({ session }: NavigationProps) => {
             <CredButton session={session} />
           )}
         </label>
-        <div className=" dropdown dropdown-content bg-base-200 w-[250px] mt-14 rounded-md shadow-md p-4">
+        <div className="z-50 dropdown dropdown-content bg-base-200 w-[250px] mt-14 rounded-md shadow-md p-4">
           <ul tabIndex={1}>
             {session && (
               <>

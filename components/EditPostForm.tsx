@@ -25,7 +25,7 @@ const EditPostForm = ({ props }: { props: EditPostFormProps }) => {
       className="flex flex-col gap-2"
     >
       <textarea
-        className="textarea textarea-primary"
+        className="textarea textarea-primary h-[75vh]"
         name="content"
         placeholder="Content"
         value={content}
