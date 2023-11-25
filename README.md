@@ -1,6 +1,6 @@
 # ReflectionSphere
 
-ReflectionSphere is a user-centric blogging platform designed for introspective expression and collaborative sharing. This project, built using Next.js, Prisma, and PostgreSQL, enables users to post captivating images accompanied by descriptive narratives. Integrated with Google authentication, users have full control over their contributions, allowing seamless editing and deletion of their posts. Join our community-driven platform and engage in a space where diverse thoughts converge, fostering an exchange of unique perspectives and reflections.
+ReflectionSphere is a user-centric blogging platform designed for introspective expression and collaborative sharing. This project, built using Next.js, Prisma, and MongoDb, enables users to post captivating images accompanied by descriptive narratives. Integrated with Google authentication, users have full control over their contributions, allowing seamless editing and deletion of their posts. Join our community-driven platform and engage in a space where diverse thoughts converge, fostering an exchange of unique perspectives and reflections.
 
 ## Features
 
@@ -12,11 +12,11 @@ ReflectionSphere is a user-centric blogging platform designed for introspective 
 
 - Next.js
 - Prisma
-- PostgreSQL
+- MongoDb
 
 ### Acknowledgements
 
-This project utilizes Next.js for the frontend, Prisma as the ORM, and PostgreSQL as the database management system.
+This project utilizes Next.js for the frontend, Prisma as the ORM, and MongoDb as the database management system.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

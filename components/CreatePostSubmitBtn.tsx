@@ -14,7 +14,7 @@ const CreatePostSubmitBtn = ({
   const { pending } = useFormStatus();
   return (
     <button className={className} onClick={() => {}} disabled={pending}>
-      {children}
+      {pending && <span className="loading loading-spinner"></span>} {children}
     </button>
   );
 };
