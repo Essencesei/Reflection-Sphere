@@ -1,16 +1,16 @@
-import CreatePost from "@/components/CreatePost";
+import CreatePost from "@/components/create-post/CreatePost";
 import PostCard from "@/components/PostCard";
-import prisma from "@/libs/db/prisma";
+import prisma from "@/lib/db/prisma";
 import { getServerSession } from "next-auth";
 import React from "react";
 
 import { redirect } from "next/navigation";
 import { Post, Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { getDB } from "@/libs/dbActions";
+import { getDB } from "@/lib/dbActions";
 import ListEmpty from "@/components/ListEmpty";
 import { Metadata } from "next";
-import { authOptions } from "@/auth";
+import { authOptions } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "My Page | Reflection Sphere",
@@ -27,8 +27,7 @@ const MyPage = async () => {
 
   return (
     <div>
-      <CreatePost></CreatePost>
-      <h2 className="text-2xl font-bold text-center mt-8">MY POST</h2>
+      <h2 className="text-2xl font-bold text-center pt-28 pb-8">MY POST</h2>
 
       <div className="grid grid-cols-1 gap-2">
         {data.length != 0 ? (

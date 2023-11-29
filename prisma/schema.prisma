@@ -62,6 +62,7 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId  String   @db.ObjectId
   image     String?
+  imagekey  String?
 
   @@map("posts")
 }

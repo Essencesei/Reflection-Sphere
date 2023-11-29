@@ -4,33 +4,20 @@ import React from "react";
 
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import { authOptions } from "@/auth";
+import { authOptions } from "@/lib/auth";
+import LoginButton from "@/components/login/LoginButton";
+
 const Landing = async () => {
   const session = await getServerSession(authOptions);
 
   if (session) redirect("/feed");
 
   return (
-    <div className="flex flex-col md:flex-row h-[75vh]">
+    <div className="flex flex-col md:flex-row -mx-96 h-screen">
       <div className="flex-1  flex flex-col justify-center items-center order-1">
-        <h1 className="text-3xl font-bold">Reflection Sphere</h1>
-        <p className="text-justify px-8 py-4">
-          Welcome to ReflectionSphere - Where Ideas Converge and Thoughts
-          Resonate. Dive into a world of boundless contemplation, where your
-          musings find a home and thoughts intertwine.
-        </p>
-        <p className="text-justify px-8 py-4">
-          Explore the depths of diverse perspectives, share reflections, and
-          embark on an introspective journey within our immersive community.
-          Discover the power of collective wisdom, where every notion finds its
-          place in an ever-expanding sphere of knowledge.
-        </p>
-        <p className="text-justify px-8 py-4">
-          Join us to connect, reflect, and articulate the essence of your
-          thoughts. Step into ReflectionSphere and let your ideas resonate.
-        </p>
+        <LoginButton></LoginButton>
       </div>
-      <div className="flex-1 flex  justify-center items-center">
+      <div className="flex-1 md:flex  justify-center items-center hidden">
         <Image
           src={"/REFLECTION SPHERE.png"}
           alt={"Logo"}

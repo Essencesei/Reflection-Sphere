@@ -1,10 +1,37 @@
 "use client";
 import { Session } from "next-auth";
-import { signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 import CredButton from "./CredButton";
 import Link from "next/link";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "./ui/navigation-menu";
+
+import { Button } from "./ui/button";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "./ui/dialog";
+import CreatePost from "./create-post/CreatePost";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 type NavigationProps = {
   session: Session | null;
@@ -12,61 +39,84 @@ type NavigationProps = {
 
 const Navigation = ({ session }: NavigationProps) => {
   return (
-    <div className="navbar flex justify-between  ">
-      <Link href={"/feed"} className="flex gap-2">
+    <div className="flex items-center w-full p-2 justify-between fixed  shadow  z-50 backdrop-blur-lg ">
+      <div>
         <Image
           src={"/REFLECTION SPHERE.png"}
-          alt={"logo"}
-          width={40}
-          height={40}
+          alt={""}
+          width={50}
+          height={50}
         ></Image>
-        <h1 className="text-xl font-bold">Reflection Sphere</h1>
-      </Link>
-      <div className="dropdown dropdown-end">
-        <label tabIndex={0}>
-          {session ? (
-            <Image
-              className="rounded-full btn btn-circle btn-ghost"
-              src={session?.user.image!}
-              alt={session?.user.name!}
-              width={40}
-              height={40}
-            ></Image>
-          ) : (
-            <CredButton session={session} />
-          )}
-        </label>
-        <div className="z-50 dropdown dropdown-content bg-base-200 w-[250px] mt-14 rounded-md shadow-md p-4">
-          <ul tabIndex={1}>
-            {session && (
-              <>
-                <li className="w-full text-center font-bold">
-                  Hello! {session.user.name}!
-                </li>
-                <li>
-                  <Link href={"/feed"} className="btn btn-ghost w-full">
-                    Feed
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/mypage"} className="btn btn-ghost w-full">
-                    My Post
-                  </Link>
-                </li>
-
-                <li className="">
-                  <button
-                    className="btn btn-ghost w-full"
-                    onClick={() => signOut()}
-                  >
-                    Log Out
-                  </button>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
       </div>
+      {session && (
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="/feed" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Feed
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href={"/mypage"} legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Posts
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <NavigationMenuLink
+                    className={`${navigationMenuTriggerStyle()} cursor-pointer`}
+                  >
+                    Create
+                  </NavigationMenuLink>
+                </DialogTrigger>
+                <DialogContent className="max-w-[457px]">
+                  <DialogHeader>
+                    <DialogTitle>Create Post</DialogTitle>
+                  </DialogHeader>
+                  <CreatePost />
+                </DialogContent>
+              </Dialog>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      )}
+      {session && (
+        <div>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar>
+                <AvatarImage
+                  src={session.user.image as string}
+                  alt={session.user.name as string}
+                ></AvatarImage>
+                <AvatarFallback>
+                  {session.user.name?.slice(0, 1)}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>
+                Signed in as {session.user.name}
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href={"/feed"}>Feed</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={"/mypage"}>Posts</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      )}
     </div>
   );
 };

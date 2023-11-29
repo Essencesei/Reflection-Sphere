@@ -3,7 +3,8 @@
 import { getServerSession } from "next-auth";
 import prisma from "./db/prisma";
 import { revalidatePath } from "next/cache";
-import { authOptions } from "@/auth";
+import { authOptions } from "@/lib/auth";
+import { utapi } from "./uploadthings/uploadthingsUTAPI";
 
 export const getDB = async () => {
   const session = await getServerSession(authOptions);
@@ -22,7 +23,11 @@ export const getDB = async () => {
   return data;
 };
 
-export const createPost = async (formdata: FormData, img: string) => {
+export const createPost = async (
+  formdata: FormData,
+  img: string,
+  imgKey: string
+) => {
   "use server";
   const session = await getServerSession(authOptions);
 
@@ -36,6 +41,7 @@ export const createPost = async (formdata: FormData, img: string) => {
       content,
       authorId: id,
       image: img,
+      imagekey: imgKey,
     },
   });
 
@@ -52,12 +58,14 @@ export const getAllPost = async () => {
   return data;
 };
 
-export const deletePost = async (id: string) => {
+export const deletePost = async (id: string, imgKey?: string) => {
   await prisma.post.delete({
     where: {
       id: id,
     },
   });
+
+  if (imgKey) await utapi.deleteFiles(imgKey);
 
   revalidatePath("/feed");
   revalidatePath("/mypage");
@@ -71,7 +79,14 @@ export const updatePost = async (formdata: FormData, id: string) => {
     },
   });
 
+  revalidatePath("/feed");
   revalidatePath("/mypage");
 
   return data;
+};
+
+export const getPostById = async (id: string) => {
+  const data = await prisma.post.findUnique({
+    where: { id: id },
+  });
 };

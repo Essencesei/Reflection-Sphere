@@ -9,7 +9,7 @@ import { getServerSession } from "next-auth";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-import { authOptions } from "@/auth";
+import { authOptions } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,8 +35,8 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions);
   return (
-    <html data-theme="light" lang="en">
-      <body className={inter.className}>
+    <html data-theme="light" lang="en" suppressHydrationWarning>
+      <body className={`${inter.className}`}>
         <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
@@ -48,8 +48,7 @@ export default async function RootLayout({
         />
         <SessionProvider>
           <Navigation session={session}></Navigation>
-
-          <main className="m-4 min-h-screen">{children}</main>
+          <main className="min-h-screen md:mx-96 mx-4 ">{children}</main>
         </SessionProvider>
       </body>
     </html>

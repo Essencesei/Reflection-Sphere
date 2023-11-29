@@ -1,5 +1,5 @@
 "use client";
-import { UploadButton } from "@/libs/uploadthings";
+import { UploadButton } from "@/lib/uploadthings/uploadthings";
 import React from "react";
 import "@uploadthing/react/styles.css";
 

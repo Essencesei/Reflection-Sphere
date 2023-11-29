@@ -8,9 +8,6 @@ const config: Config = {
     "./src/**/*.{ts,tsx,mdx}",
   ],
 
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["light"],
-  },
+  plugins: [],
 };
 export default config;
