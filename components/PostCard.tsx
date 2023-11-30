@@ -104,7 +104,7 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
                     alt={"image"}
                     width={400}
                     height={400}
-                    className="object-contain aspect-square w-full"
+                    className="object-cover aspect-square w-full"
                   ></Image>
                 )}
               </DialogTrigger>
