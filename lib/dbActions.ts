@@ -20,6 +20,8 @@ export const getDB = async () => {
     },
   });
 
+  console.log(data);
+
   return data;
 };
 
@@ -89,4 +91,23 @@ export const getPostById = async (id: string) => {
   const data = await prisma.post.findUnique({
     where: { id: id },
   });
+};
+
+export const likePost = async (id: string, userid: string) => {
+  const data = await prisma.post.findUnique({
+    where: { id: id },
+  });
+
+  if (!data?.likersId.includes(userid))
+    await prisma.post.update({
+      where: { id: id },
+      data: {
+        likersId: {
+          push: userid,
+        },
+      },
+    });
+
+  revalidatePath("/feed");
+  revalidatePath("/mypost");
 };

@@ -29,6 +29,8 @@ import {
 import { Button } from "./ui/button";
 import EditPostForm from "./edit-post/EditPostForm";
 import { getPostById } from "@/lib/dbActions";
+import LikeButton from "./LikeButton";
+import ImageVideoContainer from "./ImageVideoContainer";
 
 type PostCardProps = Prisma.PostGetPayload<{
   include: { author: { select: { name: true; image: true } } };
@@ -99,33 +101,40 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
             <Dialog>
               <DialogTrigger>
                 {props.image && (
-                  <Image
-                    src={props.image!}
-                    alt={"image"}
-                    width={400}
-                    height={400}
-                    className="object-cover aspect-square w-full"
-                  ></Image>
+                  <ImageVideoContainer
+                    props={{
+                      url: props.image,
+                      height: 300,
+                      width: 300,
+                      className: "aspect-square",
+                    }}
+                  ></ImageVideoContainer>
                 )}
               </DialogTrigger>
               <DialogContent className=" max-w-[475px] flex justify-center items-center">
                 {props.image && (
-                  <Image
-                    src={props.image!}
-                    alt={"image"}
-                    width={1000}
-                    height={1000}
-                    className="object-cover mt-4"
-                  ></Image>
+                  <ImageVideoContainer
+                    props={{ url: props.image, height: 1000, width: 1000 }}
+                  ></ImageVideoContainer>
                 )}
               </DialogContent>
             </Dialog>
           </div>
         </CardContent>
         <CardFooter>
-          {props.createdAt < props.updatedAt && (
-            <Badge variant={"outline"}>Edited</Badge>
-          )}
+          <LikeButton
+            props={{ id: props.id, userid: session?.user.id as string }}
+            buttonState={{
+              liked: props.likersId.includes(session?.user.id as string),
+            }}
+          />
+          <Badge variant={"outline"} className="border-none">
+            {props.likersId.length === 0
+              ? "Be the first to like this post"
+              : props.likersId.length === 1
+              ? `${props.likersId.length} people liked this post`
+              : `${props.likersId.length} peoples liked this post`}
+          </Badge>
         </CardFooter>
       </Card>
     </>

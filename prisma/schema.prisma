@@ -43,7 +43,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  posts         Post[]
+  posts         Post[]    @relation("author")
+  likes         Post[]    @relation("like")
 }
 
 model VerificationToken {
@@ -59,10 +60,12 @@ model Post {
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author    User     @relation("author", fields: [authorId], references: [id], onDelete: Cascade)
   authorId  String   @db.ObjectId
   image     String?
   imagekey  String?
+  likers    User     @relation("like", fields: [likersId], references: [id], onDelete: Cascade)
+  likersId  String[] @db.ObjectId
 
   @@map("posts")
 }

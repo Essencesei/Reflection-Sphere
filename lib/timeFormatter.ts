@@ -5,5 +5,6 @@ export const timeFormatter = (time: Date) => {
     year: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "Asia/Manila",
   }).format(Number(time));
 };

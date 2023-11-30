@@ -39,7 +39,7 @@ type NavigationProps = {
 
 const Navigation = ({ session }: NavigationProps) => {
   return (
-    <div className="flex items-center w-full p-2 justify-between fixed  shadow  z-50 backdrop-blur-lg ">
+    <div className="flex items-center w-full p-2 justify-between fixed  shadow  z-50 bg-background ">
       <div>
         <Image
           src={"/REFLECTION SPHERE.png"}
