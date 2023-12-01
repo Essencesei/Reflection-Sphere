@@ -12,6 +12,7 @@ type ImageVideoContainerProps = {
 
 const ImageVideoContainer = ({ props }: ImageVideoContainerProps) => {
   const extension = props.url && props.url.split(".").pop();
+
   return (
     <div>
       {extension === "mkv" ? (
