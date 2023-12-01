@@ -1,11 +1,11 @@
 # ReflectionSphere
 
-ReflectionSphere is a user-centric blogging platform designed for introspective expression and collaborative sharing. This project, built using Next.js, Prisma, and MongoDb, enables users to post captivating images accompanied by descriptive narratives. Integrated with Google authentication, users have full control over their contributions, allowing seamless editing and deletion of their posts. Join our community-driven platform and engage in a space where diverse thoughts converge, fostering an exchange of unique perspectives and reflections.
+ReflectionSphere is a user-centric blogging platform designed for introspective expression and collaborative sharing. This project, built using Next.js, Prisma, and MongoDb, enables users to post captivating images and videos accompanied by descriptive narratives. Integrated with Google authentication, users have full control over their contributions, allowing seamless editing, deletion, and liking of their posts. Join our community-driven platform and engage in a space where diverse thoughts converge, fostering an exchange of unique perspectives and reflections.
 
 ## Features
 
-- **Upload Image and Description:** Users can upload images accompanied by descriptive narratives, creating captivating blog posts.
-- **Edit and Delete Posts:** Integrated functionality allowing users to modify or remove their own posts for complete control over their contributions.
+- **Upload Images and Videos with Description:** Users can upload images and videos accompanied by descriptive narratives, creating captivating blog posts.
+- **Edit, Delete, and Like Posts:** Integrated functionality allowing users to modify, remove, and like posts for complete control over their contributions.
 - **Google Authentication:** Seamlessly authenticates users via Google accounts, ensuring security and ease of access.
 
 ### Technologies Used
@@ -17,6 +17,8 @@ ReflectionSphere is a user-centric blogging platform designed for introspective 
 ### Acknowledgements
 
 This project utilizes Next.js for the frontend, Prisma as the ORM, and MongoDb as the database management system.
+
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
