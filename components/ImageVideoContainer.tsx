@@ -15,7 +15,7 @@ const ImageVideoContainer = ({ props }: ImageVideoContainerProps) => {
 
   return (
     <div>
-      {extension === "mkv" ? (
+      {["mkv","mp4","avi","mov"].includes(extension as string)? (
         <video src={props.url} controls className="aspect-video"></video>
       ) : (
         <Image
