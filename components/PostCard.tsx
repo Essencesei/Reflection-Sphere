@@ -75,17 +75,9 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
                         <DialogTrigger asChild>
                           <Button variant={"ghost"}>Edit</Button>
                         </DialogTrigger>
-                        <DialogContent className="max-w-[475px]">
-                          <DialogHeader>
-                            <DialogTitle>Edit Post</DialogTitle>
-                          </DialogHeader>
-                          <EditPostForm
-                            props={{
-                              content: props.content,
-                              id: props.id,
-                            }}
-                          />
-                        </DialogContent>
+                        <EditPostForm
+                          props={{ content: props.content, id: props.id }}
+                        ></EditPostForm>
                       </Dialog>
                     </div>
                   </PopoverContent>
