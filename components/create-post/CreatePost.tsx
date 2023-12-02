@@ -42,6 +42,7 @@ const CreatePost = () => {
       >
         <div className="flex flex-col w-full gap-2 items-center ">
           <Textarea
+            autoComplete="off"
             name="content"
             placeholder="What's on your mind?"
             required

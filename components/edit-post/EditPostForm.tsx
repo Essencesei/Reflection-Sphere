@@ -32,6 +32,7 @@ const EditPostForm = ({ props }: { props: EditPostFormProps }) => {
         className="flex flex-col gap-2"
       >
         <Textarea
+          autoComplete="off"
           name="content"
           placeholder="Content"
           value={content}

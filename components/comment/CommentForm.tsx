@@ -22,7 +22,7 @@ const CommentForm = ({ props }: CommentFormProps) => {
     <form action={handleOnSubmit} className="p-4 flex gap-2">
       <div className="flex-1">
         <Input
-          autoComplete="false"
+          autoComplete="off"
           placeholder="Write Comment"
           name="comment"
           required
