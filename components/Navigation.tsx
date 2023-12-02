@@ -21,6 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
+  DialogClose,
 } from "./ui/dialog";
 import CreatePost from "./create-post/CreatePost";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -74,12 +75,7 @@ const Navigation = ({ session }: NavigationProps) => {
                     Create
                   </NavigationMenuLink>
                 </DialogTrigger>
-                <DialogContent className="max-w-[457px]">
-                  <DialogHeader>
-                    <DialogTitle>Create Post</DialogTitle>
-                  </DialogHeader>
-                  <CreatePost />
-                </DialogContent>
+                <CreatePost />
               </Dialog>
             </NavigationMenuItem>
           </NavigationMenuList>

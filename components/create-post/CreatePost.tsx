@@ -7,6 +7,12 @@ import { Textarea } from "../ui/textarea";
 import { UploadDropzone } from "@/lib/uploadthings/uploadthings";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { UploadZone } from "../UploadZone";
+import {
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "../ui/dialog";
 
 const CreatePost = () => {
   const [imgUrl, setImgUrl] = useState();
@@ -23,7 +29,11 @@ const CreatePost = () => {
   };
 
   return (
-    <div>
+    <DialogContent className="max-w-[457px]">
+      <DialogHeader>
+        <DialogTitle>Create Post</DialogTitle>
+      </DialogHeader>
+
       <form
         action={async (e) => {
           await createPost(e, imgUrl!, imgKey!);
@@ -38,10 +48,12 @@ const CreatePost = () => {
           />
           <UploadZone onClientUploadComplete={handleOnClientUploadComplete} />
 
-          <CreatePostSubmitBtn />
+          <DialogClose>
+            <CreatePostSubmitBtn />
+          </DialogClose>
         </div>
       </form>
-    </div>
+    </DialogContent>
   );
 };
 
