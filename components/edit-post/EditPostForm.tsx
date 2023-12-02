@@ -7,7 +7,6 @@ import { Textarea } from "../ui/textarea";
 import CreatePostSubmitBtn from "../create-post/CreatePostSubmitBtn";
 import { revalidatePath } from "next/cache";
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
 
 type EditPostFormProps = {
   content: string;
@@ -39,9 +38,7 @@ const EditPostForm = ({ props }: { props: EditPostFormProps }) => {
           onChange={handleContentChange}
           required
         />
-        <DialogClose>
-          <CreatePostSubmitBtn />
-        </DialogClose>
+        <CreatePostSubmitBtn name="Edit" />
       </form>
     </DialogContent>
   );

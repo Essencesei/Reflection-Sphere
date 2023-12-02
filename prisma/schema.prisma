@@ -45,6 +45,7 @@ model User {
   sessions      Session[]
   posts         Post[]    @relation("author")
   likes         Post[]    @relation("like")
+  comments      Comment[]
 }
 
 model VerificationToken {
@@ -56,16 +57,27 @@ model VerificationToken {
 }
 
 model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  author    User     @relation("author", fields: [authorId], references: [id], onDelete: Cascade)
-  authorId  String   @db.ObjectId
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  author    User      @relation("author", fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String    @db.ObjectId
   image     String?
   imagekey  String?
-  likers    User     @relation("like", fields: [likersId], references: [id], onDelete: Cascade)
-  likersId  String[] @db.ObjectId
+  likers    User      @relation("like", fields: [likersId], references: [id], onDelete: Cascade)
+  likersId  String[]  @db.ObjectId
+  comments  Comment[]
 
   @@map("posts")
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  comment   String
+  postId    String   @db.ObjectId
+  authorId  String   @db.ObjectId
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
 }

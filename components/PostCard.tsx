@@ -28,9 +28,11 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import EditPostForm from "./edit-post/EditPostForm";
-import { getPostById } from "@/lib/dbActions";
+import { getComments, getPostById } from "@/lib/dbActions";
 import LikeButton from "./LikeButton";
 import ImageVideoContainer from "./ImageVideoContainer";
+import CommentForm from "./comment/CommentForm";
+import CommentList from "./comment/CommentList";
 
 type PostCardProps = Prisma.PostGetPayload<{
   include: { author: { select: { name: true; image: true } } };
@@ -38,6 +40,7 @@ type PostCardProps = Prisma.PostGetPayload<{
 
 const PostCard = async ({ props }: { props: PostCardProps }) => {
   const session = await getServerSession(authOptions);
+  const comments = await getComments(props.id);
 
   const readMore = props.content.length > 500;
 
@@ -128,6 +131,12 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
               : `${props.likersId.length} peoples liked this post`}
           </Badge>
         </CardFooter>
+        <CommentForm props={{ authorId: session?.user.id, postId: props.id }} />
+
+        <div className="pl-8 p-4 flex flex-col gap-2 max-h-[400px] overflow-y-scroll">
+          <span>Comments</span>
+          <CommentList props={comments}></CommentList>
+        </div>
       </Card>
     </>
   );

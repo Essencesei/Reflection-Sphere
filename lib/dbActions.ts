@@ -111,3 +111,38 @@ export const likePost = async (id: string, userid: string) => {
   revalidatePath("/feed");
   revalidatePath("/mypost");
 };
+
+export const postComment = async (
+  formdata: FormData,
+  postId: string,
+  authorId: string
+) => {
+  "use server";
+  const comment = formdata.get("comment")?.toString();
+
+  console.log(comment);
+  if (!comment) throw new Error("comment is required");
+
+  const data = await prisma.comment.create({
+    data: {
+      comment,
+      postId,
+      authorId,
+    },
+  });
+  revalidatePath("/feed");
+  revalidatePath("/mypost");
+};
+
+export const getComments = async (postId: string) => {
+  const data = await prisma.comment.findMany({
+    where: { postId: postId },
+    include: { author: { select: { name: true, image: true } } },
+    orderBy: { createdAt: "desc" },
+  });
+
+  revalidatePath("/feed");
+  revalidatePath("/mypost");
+
+  return data;
+};

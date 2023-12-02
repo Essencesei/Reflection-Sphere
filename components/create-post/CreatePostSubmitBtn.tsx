@@ -4,7 +4,11 @@ import React, { ComponentProps } from "react";
 import { useFormStatus } from "react-dom";
 import { Button } from "../ui/button";
 
-const CreatePostSubmitBtn = () => {
+type CreatePostSubmitBtnProps = {
+  name?: string;
+};
+
+const CreatePostSubmitBtn = ({ name }: CreatePostSubmitBtnProps) => {
   const { pending } = useFormStatus();
   return (
     <Button onClick={() => {}} disabled={pending} className="w-full">
@@ -13,7 +17,7 @@ const CreatePostSubmitBtn = () => {
           <Loader2 className="animate-spin"></Loader2> Please wait
         </span>
       ) : (
-        <span className="flex gap-4">Create</span>
+        <span className="flex gap-4">{name ?? "Create"}</span>
       )}
     </Button>
   );
