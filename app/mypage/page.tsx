@@ -24,28 +24,24 @@ const MyPage = async () => {
 
   if (!session) redirect("/");
 
-  console.log(session?.user.id, session.user.name);
-
   return (
     <div>
       <h2 className="text-2xl font-bold text-center pt-28 pb-8">MY POST</h2>
 
       <div className="grid grid-cols-1 gap-2">
-        <Suspense fallback={<LoadingSkeleton />}>
-          {data.length != 0 ? (
-            data.map(
-              (
-                d: Prisma.PostGetPayload<{
-                  include: { author: { select: { name: true; image: true } } };
-                }>
-              ) => {
-                return <PostCard key={d.id} props={d}></PostCard>;
-              }
-            )
-          ) : (
-            <ListEmpty />
-          )}
-        </Suspense>
+        {data.length != 0 ? (
+          data.map(
+            (
+              d: Prisma.PostGetPayload<{
+                include: { author: { select: { name: true; image: true } } };
+              }>
+            ) => {
+              return <PostCard key={d.id} props={d}></PostCard>;
+            }
+          )
+        ) : (
+          <ListEmpty />
+        )}
       </div>
     </div>
   );

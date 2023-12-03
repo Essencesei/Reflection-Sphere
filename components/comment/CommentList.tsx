@@ -28,7 +28,6 @@ const CommentList = ({ props }: CommentListProps) => {
             include: { author: { select: { name: true; image: true } } };
           }>
         ) => {
-          console.log();
           return (
             <Card key={el.id}>
               <CardHeader>

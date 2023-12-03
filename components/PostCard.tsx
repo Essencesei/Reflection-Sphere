@@ -40,7 +40,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { cn } from "@/lib/utils";
 
 type PostCardProps = Prisma.PostGetPayload<{
   include: { author: { select: { name: true; image: true } } };
@@ -164,13 +163,9 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
           props={{
             postId: props.id,
             session: session as Session,
+            comments: comments,
           }}
         />
-
-        <div className="pl-8 p-4 flex flex-col gap-2 max-h-[400px] overflow-y-scroll">
-          <span>Comments</span>
-          <CommentList props={comments}></CommentList>
-        </div>
       </Card>
     </>
   );

@@ -20,8 +20,6 @@ export const getDB = async () => {
     },
   });
 
-  console.log(data);
-
   return data;
 };
 
@@ -125,7 +123,6 @@ export const postComment = async (
   postId: string,
   authorId: string
 ) => {
-  "use server";
   const comment = formdata.get("comment")?.toString();
   if (!comment) throw new Error("comment is required");
 

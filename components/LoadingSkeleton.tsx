@@ -3,7 +3,7 @@ import { Skeleton } from "./ui/skeleton";
 
 const LoadingSkeleton = () => {
   return (
-    <div className=" flex flex-col gap-4 p-4">
+    <div className=" flex flex-col gap-4 p-4 pt-52">
       <div className="flex items-center gap-4">
         <Skeleton className="h-[40px] w-[40px] rounded-full"></Skeleton>
         <div className="flex flex-col gap-2">

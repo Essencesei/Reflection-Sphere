@@ -26,15 +26,13 @@ const Feed = async () => {
       <h2 className="text-2xl font-bold text-center pt-28 pb-8">FEED</h2>
 
       <div className="grid grid-cols-1 gap-2">
-        <Suspense fallback={<LoadingSkeleton />}>
-          {data.length != 0 ? (
-            data.map((d) => {
-              return <PostCard key={d.id} props={d}></PostCard>;
-            })
-          ) : (
-            <ListEmpty />
-          )}
-        </Suspense>
+        {data.length != 0 ? (
+          data.map((d) => {
+            return <PostCard key={d.id} props={d}></PostCard>;
+          })
+        ) : (
+          <ListEmpty />
+        )}
       </div>
     </div>
   );

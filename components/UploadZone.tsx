@@ -20,7 +20,7 @@ export const UploadZone = ({ onClientUploadComplete }: UploadZoneProps) => (
     onUploadError={(error: Error) => {}}
     onUploadBegin={(name) => {
       // Do something once upload begins
-      console.log("Uploading: ", name);
+      // console.log("Uploading: ", name);
     }}
   />
 );
