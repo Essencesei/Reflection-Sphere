@@ -13,12 +13,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import { Toggle } from "../ui/toggle";
 
 const CreatePost = () => {
   const [imgUrl, setImgUrl] = useState();
   const [imgKey, setImgKey] = useState();
   const [addImage, setAddImage] = useState(false);
   const [done, setDone] = useState(false);
+  const [privacy, setPrivacy] = useState<string>("Public");
 
   const handleOnClientUploadComplete = (res: any, done: boolean) => {
     console.log(res, "RES");
@@ -36,7 +38,7 @@ const CreatePost = () => {
 
       <form
         action={async (e) => {
-          await createPost(e, imgUrl!, imgKey!);
+          await createPost(e, imgUrl!, imgKey!, privacy);
         }}
         className="flex gap-2 p-4"
       >
@@ -47,6 +49,15 @@ const CreatePost = () => {
             placeholder="What's on your mind?"
             required
           />
+          <Toggle
+            onClick={() => {
+              if (privacy === "Public") setPrivacy("Private");
+              else setPrivacy("Public");
+            }}
+          >
+            {privacy}
+          </Toggle>
+
           <UploadZone onClientUploadComplete={handleOnClientUploadComplete} />
 
           <DialogClose>

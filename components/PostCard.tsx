@@ -61,7 +61,13 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
               </Avatar>
 
               <CardDescription className="flex flex-col">
-                <span className="text-lg">{props.author.name}</span>
+                <span className="text-lg flex items-center">
+                  {props.author.name}
+                  <Badge variant={"outline"} className="border-none">
+                    {props.privacy}
+                  </Badge>
+                </span>
+
                 <span> {timeFormatter(props.createdAt)}</span>
               </CardDescription>
             </div>

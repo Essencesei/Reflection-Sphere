@@ -68,6 +68,7 @@ model Post {
   likers    User      @relation("like", fields: [likersId], references: [id], onDelete: Cascade)
   likersId  String[]  @db.ObjectId
   comments  Comment[]
+  privacy   String    @default("Public")
 
   @@map("posts")
 }

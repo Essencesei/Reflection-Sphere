@@ -28,7 +28,8 @@ export const getDB = async () => {
 export const createPost = async (
   formdata: FormData,
   img: string,
-  imgKey: string
+  imgKey: string,
+  privacy: string
 ) => {
   "use server";
   const session = await getServerSession(authOptions);
@@ -44,6 +45,7 @@ export const createPost = async (
       authorId: id,
       image: img,
       imagekey: imgKey,
+      privacy: privacy,
     },
   });
 
@@ -53,6 +55,7 @@ export const createPost = async (
 export const getAllPost = async () => {
   const session = await getServerSession(authOptions);
   const data = await prisma.post.findMany({
+    where: { privacy: "Public" },
     include: { author: { select: { image: true, name: true } } },
     orderBy: { createdAt: "desc" },
   });
