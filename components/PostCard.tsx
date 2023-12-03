@@ -40,6 +40,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
 type PostCardProps = Prisma.PostGetPayload<{
   include: { author: { select: { name: true; image: true } } };
@@ -92,9 +93,13 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
                     <DropdownMenuItem>
                       <DeletePostBtn id={props.id!} imgkey={props.imagekey!} />
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                       <Dialog>
-                        <DialogTrigger className="w-full text-start">
+                        <DialogTrigger
+                          className={
+                            "w-full cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                          }
+                        >
                           Edit
                         </DialogTrigger>
                         <EditPostForm
