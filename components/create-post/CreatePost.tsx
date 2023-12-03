@@ -49,13 +49,13 @@ const CreatePost = () => {
             placeholder="What's on your mind?"
             required
           />
-          <div className="flex justify-between w-full">
+          <div className="flex w-full gap-2">
             <CreatePostFileIndicator
               props={{ imgKey: imgKey!, imgUrl: imgUrl! }}
             />
             <Toggle
               variant={"outline"}
-              className="self-start"
+              className="border border-primary"
               onClick={() => {
                 if (privacy === "Public") setPrivacy("Private");
                 else setPrivacy("Public");
@@ -70,8 +70,8 @@ const CreatePost = () => {
           </div>
 
           <UploadZone onClientUploadComplete={handleOnClientUploadComplete} />
-          <DialogClose>
-            <CreatePostSubmitBtn />
+          <DialogClose className="w-full">
+            <CreatePostSubmitBtn toastMessage="Post Created!" />
           </DialogClose>
         </div>
       </form>

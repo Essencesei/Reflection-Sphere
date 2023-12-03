@@ -43,21 +43,23 @@ const EditPostForm = ({ props }: { props: EditPostFormProps }) => {
           onChange={handleContentChange}
           required
         />
-        <Toggle
-          variant={"outline"}
-          className="self-start"
-          onClick={() => {
-            if (privacy === "Public") setPrivacy("Private");
-            else setPrivacy("Public");
-          }}
-        >
-          {privacy === "Public" ? (
-            <MdOutlinePublic className={"w-[15px] h-[15px]"} />
-          ) : (
-            <FaLock className={"w-[15px] h-[15px]"} />
-          )}
-        </Toggle>
-        <CreatePostSubmitBtn name="Edit" />
+        <div className="flex gap-2">
+          <Toggle
+            variant={"outline"}
+            className="self-start"
+            onClick={() => {
+              if (privacy === "Public") setPrivacy("Private");
+              else setPrivacy("Public");
+            }}
+          >
+            {privacy === "Public" ? (
+              <MdOutlinePublic className={"w-[15px] h-[15px]"} />
+            ) : (
+              <FaLock className={"w-[15px] h-[15px]"} />
+            )}
+          </Toggle>
+          <CreatePostSubmitBtn toastMessage="Changes saved!" />
+        </div>
       </form>
     </DialogContent>
   );

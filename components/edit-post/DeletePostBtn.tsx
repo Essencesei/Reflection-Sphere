@@ -4,13 +4,15 @@ import React, { useTransition } from "react";
 import { MdDelete } from "react-icons/md";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
+import { toast } from "../ui/use-toast";
 
 type DeletePostBtnProps = {
   id: string;
   imgkey: string;
+  toastMessage: string;
 };
 
-const DeletePostBtn = ({ id, imgkey }: DeletePostBtnProps) => {
+const DeletePostBtn = ({ id, imgkey, toastMessage }: DeletePostBtnProps) => {
   const [ispending, startTransition] = useTransition();
   return (
     <button
@@ -18,6 +20,9 @@ const DeletePostBtn = ({ id, imgkey }: DeletePostBtnProps) => {
       onClick={() => {
         startTransition(async () => {
           await deletePost(id, imgkey);
+          toast({
+            title: toastMessage,
+          });
         });
       }}
       disabled={ispending}

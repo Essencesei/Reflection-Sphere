@@ -36,7 +36,7 @@ const CommentForm = ({ props }: CommentFormProps) => {
         />
       </div>
       <div className="flex-0">
-        <CreatePostSubmitBtn name="Comment" />
+        <CreatePostSubmitBtn toastMessage="Comment Added!" />
       </div>
     </form>
   );

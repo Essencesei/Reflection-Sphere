@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
-import SessionProvider from "./SessionProvider";
+import SessionProvider from "../context/SessionProvider";
 import Navigation from "@/components/navigation/Navigation";
 import { getServerSession } from "next-auth";
 
@@ -10,6 +10,7 @@ import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { authOptions } from "@/lib/auth";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,6 +50,7 @@ export default async function RootLayout({
         <SessionProvider>
           <Navigation session={session}></Navigation>
           <main className="min-h-screen md:mx-96 mx-4 ">{children}</main>
+          <Toaster />
         </SessionProvider>
       </body>
     </html>

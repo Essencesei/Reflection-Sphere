@@ -91,7 +91,11 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
                     <DropdownMenuLabel>Settings</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                      <DeletePostBtn id={props.id!} imgkey={props.imagekey!} />
+                      <DeletePostBtn
+                        id={props.id!}
+                        imgkey={props.imagekey!}
+                        toastMessage="Post Deleted!"
+                      />
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <Dialog>
