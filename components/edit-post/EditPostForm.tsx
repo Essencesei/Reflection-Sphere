@@ -7,6 +7,9 @@ import { Textarea } from "../ui/textarea";
 import CreatePostSubmitBtn from "../create-post/CreatePostSubmitBtn";
 import { revalidatePath } from "next/cache";
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { MdOutlinePublic } from "react-icons/md";
+import { FaLock } from "react-icons/fa";
+import { Toggle } from "../ui/toggle";
 
 type EditPostFormProps = {
   content: string;
@@ -15,6 +18,7 @@ type EditPostFormProps = {
 
 const EditPostForm = ({ props }: { props: EditPostFormProps }) => {
   const [content, setcontent] = useState(props.content);
+  const [privacy, setPrivacy] = useState<string>("Public");
 
   const handleContentChange = (event: any) => {
     setcontent(event.currentTarget.value);
@@ -27,7 +31,7 @@ const EditPostForm = ({ props }: { props: EditPostFormProps }) => {
       </DialogHeader>
       <form
         action={async (e) => {
-          await updatePost(e, props.id);
+          await updatePost(e, props.id, privacy);
         }}
         className="flex flex-col gap-2"
       >
@@ -39,6 +43,20 @@ const EditPostForm = ({ props }: { props: EditPostFormProps }) => {
           onChange={handleContentChange}
           required
         />
+        <Toggle
+          variant={"outline"}
+          className="self-start"
+          onClick={() => {
+            if (privacy === "Public") setPrivacy("Private");
+            else setPrivacy("Public");
+          }}
+        >
+          {privacy === "Public" ? (
+            <MdOutlinePublic className={"w-[15px] h-[15px]"} />
+          ) : (
+            <FaLock className={"w-[15px] h-[15px]"} />
+          )}
+        </Toggle>
         <CreatePostSubmitBtn name="Edit" />
       </form>
     </DialogContent>

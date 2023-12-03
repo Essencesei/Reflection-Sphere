@@ -76,11 +76,16 @@ export const deletePost = async (id: string, imgKey?: string) => {
   revalidatePath("/mypage");
 };
 
-export const updatePost = async (formdata: FormData, id: string) => {
+export const updatePost = async (
+  formdata: FormData,
+  id: string,
+  privacy: string
+) => {
   const data = await prisma.post.update({
     where: { id: id },
     data: {
       content: formdata.get("content")?.toString(),
+      privacy: privacy,
     },
   });
 
