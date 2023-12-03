@@ -2,10 +2,7 @@
 import React, { useState } from "react";
 import CreatePostSubmitBtn from "./CreatePostSubmitBtn";
 import { createPost } from "@/lib/dbActions";
-import UploadBtn from "../UploadBtn";
 import { Textarea } from "../ui/textarea";
-import { UploadDropzone } from "@/lib/uploadthings/uploadthings";
-import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { UploadZone } from "../UploadZone";
 import {
   DialogClose,
@@ -16,8 +13,6 @@ import {
 import { Toggle } from "../ui/toggle";
 import { MdOutlinePublic } from "react-icons/md";
 import { FaLock, FaRegFileVideo } from "react-icons/fa";
-import Image from "next/image";
-import { CiFileOff } from "react-icons/ci";
 import CreatePostFileIndicator from "./CreatePostFileIndicator";
 
 const CreatePost = () => {
