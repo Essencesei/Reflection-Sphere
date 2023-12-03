@@ -7,8 +7,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Session } from "next-auth";
 import { Prisma } from "@prisma/client";
 import CommentList from "./CommentList";
-import { Button } from "../ui/button";
-import { FiSend } from "react-icons/fi";
 
 type CommentFormProps = {
   props: {
@@ -63,10 +61,7 @@ const CommentForm = ({ props }: CommentFormProps) => {
           />
         </div>
         <div className="flex-0">
-          {/* <CreatePostSubmitBtn toastMessage="Comment Added!" /> */}
-          <Button>
-            <FiSend />
-          </Button>
+          <CreatePostSubmitBtn toastMessage="Comment Added!" />
         </div>
       </form>
       <div className="pl-8 p-4 flex flex-col gap-2 max-h-[400px] overflow-y-scroll">

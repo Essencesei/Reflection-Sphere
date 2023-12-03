@@ -22,6 +22,9 @@ const CreatePostSubmitBtn = ({
   return (
     <Button
       onClick={() => {
+        toast({
+          title: "Please wait",
+        });
         startTransition(() => {
           toast({
             title: toastMessage,

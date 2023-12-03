@@ -18,6 +18,9 @@ const DeletePostBtn = ({ id, imgkey, toastMessage }: DeletePostBtnProps) => {
     <button
       className="w-full text-start"
       onClick={() => {
+        toast({
+          title: "Please wait",
+        });
         startTransition(async () => {
           await deletePost(id, imgkey);
           toast({
