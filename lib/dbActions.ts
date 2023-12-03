@@ -122,8 +122,6 @@ export const postComment = async (
 ) => {
   "use server";
   const comment = formdata.get("comment")?.toString();
-
-  console.log(comment);
   if (!comment) throw new Error("comment is required");
 
   const data = await prisma.comment.create({

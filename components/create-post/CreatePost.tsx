@@ -15,8 +15,9 @@ import {
 } from "../ui/dialog";
 import { Toggle } from "../ui/toggle";
 import { MdOutlinePublic } from "react-icons/md";
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaRegFileVideo } from "react-icons/fa";
 import Image from "next/image";
+import { CiFileOff } from "react-icons/ci";
 
 const CreatePost = () => {
   const [imgUrl, setImgUrl] = useState<string>();
@@ -53,33 +54,56 @@ const CreatePost = () => {
             placeholder="What's on your mind?"
             required
           />
-
-          {imgUrl && (
-            <Image
-              className="self-start aspect-square border border-primary rounded-sm"
-              src={imgUrl!}
-              alt={imgKey!}
-              width={40}
-              height={40}
-            />
-          )}
-
-          <Toggle
-            className="self-start"
-            onClick={() => {
-              if (privacy === "Public") setPrivacy("Private");
-              else setPrivacy("Public");
-            }}
-          >
-            {privacy === "Public" ? (
-              <MdOutlinePublic className={"w-[20px] h-[20px]"} />
+          <div className="flex justify-between w-full">
+            {["mkv", "avi", "mp4", "mov"].includes(
+              imgUrl?.split(".")[2] as string
+            ) ? (
+              <div className="flex items-center justify-center w-[40px] h-[40px] self-start aspect-square border border-primary rounded-sm">
+                <FaRegFileVideo />
+              </div>
+            ) : [
+                "jpeg",
+                "jpg",
+                "png",
+                "gif",
+                "tiff",
+                "tif",
+                "bmp",
+                "webp",
+                "svg",
+                "ico",
+                "psd",
+                "raw",
+              ].includes(imgUrl?.split(".")[2] as string) ? (
+              <Image
+                className="self-start aspect-square border border-primary rounded-sm"
+                src={imgUrl!}
+                alt={imgKey!}
+                width={40}
+                height={40}
+              />
             ) : (
-              <FaLock className={"w-[20px] h-[20px]"} />
+              <div className="flex items-center justify-center w-[40px] h-[40px] self-start aspect-square border border-primary rounded-sm">
+                <CiFileOff />
+              </div>
             )}
-          </Toggle>
+            <Toggle
+              variant={"outline"}
+              className="self-start"
+              onClick={() => {
+                if (privacy === "Public") setPrivacy("Private");
+                else setPrivacy("Public");
+              }}
+            >
+              {privacy === "Public" ? (
+                <MdOutlinePublic className={"w-[15px] h-[15px]"} />
+              ) : (
+                <FaLock className={"w-[15px] h-[15px]"} />
+              )}
+            </Toggle>
+          </div>
 
           <UploadZone onClientUploadComplete={handleOnClientUploadComplete} />
-
           <DialogClose>
             <CreatePostSubmitBtn />
           </DialogClose>
