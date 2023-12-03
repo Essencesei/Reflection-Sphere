@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import SessionProvider from "./SessionProvider";
-import Navigation from "@/components/Navigation";
+import Navigation from "@/components/navigation/Navigation";
 import { getServerSession } from "next-auth";
 
 import { extractRouterConfig } from "uploadthing/server";

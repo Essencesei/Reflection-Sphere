@@ -13,8 +13,8 @@ type DeletePostBtnProps = {
 const DeletePostBtn = ({ id, imgkey }: DeletePostBtnProps) => {
   const [ispending, startTransition] = useTransition();
   return (
-    <Button
-      variant={"ghost"}
+    <button
+      className="w-full text-start"
       onClick={() => {
         startTransition(async () => {
           await deletePost(id, imgkey);
@@ -30,7 +30,7 @@ const DeletePostBtn = ({ id, imgkey }: DeletePostBtnProps) => {
           Please wait
         </span>
       )}
-    </Button>
+    </button>
   );
 };
 

@@ -1,12 +1,9 @@
 import { timeFormatter } from "@/lib/timeFormatter";
 import { Prisma } from "@prisma/client";
-import Image from "next/image";
 import React, { useState } from "react";
 import DeletePostBtn from "./edit-post/DeletePostBtn";
-import { getServerSession } from "next-auth";
+import { Session, getServerSession } from "next-auth";
 import { SlOptionsVertical } from "react-icons/sl";
-
-import EditPostBtn from "./edit-post/EditPostBtn";
 import { authOptions } from "@/lib/auth";
 import {
   Card,
@@ -19,13 +16,7 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import EditPostForm from "./edit-post/EditPostForm";
 import { getComments, getPostById } from "@/lib/dbActions";
@@ -35,6 +26,15 @@ import CommentForm from "./comment/CommentForm";
 import CommentList from "./comment/CommentList";
 import { MdOutlinePublic } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 type PostCardProps = Prisma.PostGetPayload<{
   include: { author: { select: { name: true; image: true } } };
@@ -77,24 +77,28 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
             </div>
             <div>
               {props.authorId === session?.user.id && (
-                <Popover>
-                  <PopoverTrigger>
-                    <SlOptionsVertical />
-                  </PopoverTrigger>
-                  <PopoverContent>
-                    <div className="flex flex-col">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <SlOptionsVertical className="w-[15px] h-[15px]" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Settings</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>
                       <DeletePostBtn id={props.id!} imgkey={props.imagekey!} />
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
                       <Dialog>
-                        <DialogTrigger asChild>
-                          <Button variant={"ghost"}>Edit</Button>
+                        <DialogTrigger className="w-full text-start">
+                          Edit
                         </DialogTrigger>
                         <EditPostForm
                           props={{ content: props.content, id: props.id }}
                         ></EditPostForm>
                       </Dialog>
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               )}
             </div>
           </CardTitle>
@@ -141,7 +145,12 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
               : `${props.likersId.length} peoples liked this post`}
           </Badge>
         </CardFooter>
-        <CommentForm props={{ authorId: session?.user.id, postId: props.id }} />
+        <CommentForm
+          props={{
+            postId: props.id,
+            session: session as Session,
+          }}
+        />
 
         <div className="pl-8 p-4 flex flex-col gap-2 max-h-[400px] overflow-y-scroll">
           <span>Comments</span>
