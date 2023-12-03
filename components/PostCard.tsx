@@ -16,7 +16,12 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "./ui/dialog";
 import { Button } from "./ui/button";
 import EditPostForm from "./edit-post/EditPostForm";
 import { getComments, getPostById } from "@/lib/dbActions";
@@ -48,7 +53,7 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
 
   return (
     <>
-      <Card>
+      <Card className="select-none">
         <CardHeader>
           <CardTitle className="flex justify-between">
             <div className="flex items-center gap-4">
@@ -120,7 +125,8 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
                   ></ImageVideoContainer>
                 )}
               </DialogTrigger>
-              <DialogContent className=" max-w-[475px] flex justify-center items-center">
+              <DialogContent className=" bg-muted min-w-[475px] h-full flex flex-col justify-center items-center">
+                <DialogHeader></DialogHeader>
                 {props.image && (
                   <ImageVideoContainer
                     props={{ url: props.image, height: 1000, width: 1000 }}

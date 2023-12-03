@@ -14,7 +14,7 @@ const ImageVideoContainer = ({ props }: ImageVideoContainerProps) => {
   const extension = props.url && props.url.split(".").pop();
 
   return (
-    <div>
+    <>
       {["mkv", "mp4", "avi", "mov"].includes(extension as string) ? (
         <video
           src={props.url}
@@ -29,10 +29,10 @@ const ImageVideoContainer = ({ props }: ImageVideoContainerProps) => {
           alt={props.url}
           width={props.width}
           height={props.height}
-          className={`object-cover w-full   ${props.className}`}
+          className={`object-cover w-full rounded-md  ${props.className}`}
         ></Image>
       )}
-    </div>
+    </>
   );
 };
 
