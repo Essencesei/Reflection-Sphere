@@ -33,6 +33,8 @@ import LikeButton from "./LikeButton";
 import ImageVideoContainer from "./ImageVideoContainer";
 import CommentForm from "./comment/CommentForm";
 import CommentList from "./comment/CommentList";
+import { MdOutlinePublic } from "react-icons/md";
+import { FaLock } from "react-icons/fa";
 
 type PostCardProps = Prisma.PostGetPayload<{
   include: { author: { select: { name: true; image: true } } };
@@ -61,11 +63,13 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
               </Avatar>
 
               <CardDescription className="flex flex-col">
-                <span className="text-lg flex items-center">
-                  {props.author.name}
-                  <Badge variant={"outline"} className="border-none">
-                    {props.privacy}
-                  </Badge>
+                <span className="text-lg flex items-center gap-2">
+                  {props.author.name}{" "}
+                  {props.privacy === "Public" ? (
+                    <MdOutlinePublic className={"w-[20px] h-[20px]"} />
+                  ) : (
+                    <FaLock className={"w-[15px] h-[15px]"} />
+                  )}
                 </span>
 
                 <span> {timeFormatter(props.createdAt)}</span>
@@ -98,7 +102,7 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
         <CardContent>
           <p className="whitespace-pre-wrap ">{props.content}</p>
           <br />
-          <div className="flex justify-center bg-slate-500 ">
+          <div className="flex justify-center bg-muted ">
             <Dialog>
               <DialogTrigger>
                 {props.image && (
@@ -107,7 +111,7 @@ const PostCard = async ({ props }: { props: PostCardProps }) => {
                       url: props.image,
                       height: 300,
                       width: 300,
-                      className: "aspect-square",
+                      className: "aspect-[4/3]",
                     }}
                   ></ImageVideoContainer>
                 )}

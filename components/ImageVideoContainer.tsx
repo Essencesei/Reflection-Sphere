@@ -16,14 +16,20 @@ const ImageVideoContainer = ({ props }: ImageVideoContainerProps) => {
   return (
     <div>
       {["mkv", "mp4", "avi", "mov"].includes(extension as string) ? (
-        <video src={props.url} controls className="aspect-video"></video>
+        <video
+          src={props.url}
+          controlsList="nodownload"
+          controls
+          className="aspect-video"
+          autoPlay
+        ></video>
       ) : (
         <Image
           src={props.url}
           alt={props.url}
           width={props.width}
           height={props.height}
-          className={`object-cover w-full  ${props.className}`}
+          className={`object-cover w-full   ${props.className}`}
         ></Image>
       )}
     </div>

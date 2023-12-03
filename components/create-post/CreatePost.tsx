@@ -14,9 +14,12 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { Toggle } from "../ui/toggle";
+import { MdOutlinePublic } from "react-icons/md";
+import { FaLock } from "react-icons/fa";
+import Image from "next/image";
 
 const CreatePost = () => {
-  const [imgUrl, setImgUrl] = useState();
+  const [imgUrl, setImgUrl] = useState<string>();
   const [imgKey, setImgKey] = useState();
   const [addImage, setAddImage] = useState(false);
   const [done, setDone] = useState(false);
@@ -39,6 +42,7 @@ const CreatePost = () => {
       <form
         action={async (e) => {
           await createPost(e, imgUrl!, imgKey!, privacy);
+          setImgUrl("");
         }}
         className="flex gap-2 p-4"
       >
@@ -49,13 +53,29 @@ const CreatePost = () => {
             placeholder="What's on your mind?"
             required
           />
+
+          {imgUrl && (
+            <Image
+              className="self-start aspect-square border border-primary rounded-sm"
+              src={imgUrl!}
+              alt={imgKey!}
+              width={40}
+              height={40}
+            />
+          )}
+
           <Toggle
+            className="self-start"
             onClick={() => {
               if (privacy === "Public") setPrivacy("Private");
               else setPrivacy("Public");
             }}
           >
-            {privacy}
+            {privacy === "Public" ? (
+              <MdOutlinePublic className={"w-[20px] h-[20px]"} />
+            ) : (
+              <FaLock className={"w-[20px] h-[20px]"} />
+            )}
           </Toggle>
 
           <UploadZone onClientUploadComplete={handleOnClientUploadComplete} />

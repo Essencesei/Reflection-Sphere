@@ -12,6 +12,7 @@ export const UploadZone = ({ onClientUploadComplete }: UploadZoneProps) => (
       button: "bg-primary",
       label: "text-primary hover:text-primary",
     }}
+    config={{ mode: "auto" }}
     endpoint="imageUploader"
     onClientUploadComplete={(res) => {
       onClientUploadComplete(res, true);
