@@ -18,6 +18,7 @@ import { MdOutlinePublic } from "react-icons/md";
 import { FaLock, FaRegFileVideo } from "react-icons/fa";
 import Image from "next/image";
 import { CiFileOff } from "react-icons/ci";
+import CreatePostFileIndicator from "./CreatePostFileIndicator";
 
 const CreatePost = () => {
   const [imgUrl, setImgUrl] = useState<string>();
@@ -27,7 +28,6 @@ const CreatePost = () => {
   const [privacy, setPrivacy] = useState<string>("Public");
 
   const handleOnClientUploadComplete = (res: any, done: boolean) => {
-    console.log(res, "RES");
     setImgUrl(res[0].url);
     setImgKey(res[0].key);
     setDone(done);
@@ -55,38 +55,9 @@ const CreatePost = () => {
             required
           />
           <div className="flex justify-between w-full">
-            {["mkv", "avi", "mp4", "mov"].includes(
-              imgUrl?.split(".")[2] as string
-            ) ? (
-              <div className="flex items-center justify-center w-[40px] h-[40px] self-start aspect-square border border-primary rounded-sm">
-                <FaRegFileVideo />
-              </div>
-            ) : [
-                "jpeg",
-                "jpg",
-                "png",
-                "gif",
-                "tiff",
-                "tif",
-                "bmp",
-                "webp",
-                "svg",
-                "ico",
-                "psd",
-                "raw",
-              ].includes(imgUrl?.split(".")[2] as string) ? (
-              <Image
-                className="self-start aspect-square border border-primary rounded-sm"
-                src={imgUrl!}
-                alt={imgKey!}
-                width={40}
-                height={40}
-              />
-            ) : (
-              <div className="flex items-center justify-center w-[40px] h-[40px] self-start aspect-square border border-primary rounded-sm">
-                <CiFileOff />
-              </div>
-            )}
+            <CreatePostFileIndicator
+              props={{ imgKey: imgKey!, imgUrl: imgUrl! }}
+            />
             <Toggle
               variant={"outline"}
               className="self-start"
